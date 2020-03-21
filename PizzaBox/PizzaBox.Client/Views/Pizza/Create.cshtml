@@ -1,0 +1,27 @@
+@model PizzaBox.Client.Models.PizzaModel
+
+<form class="form-group" action="/pizza/create" method="post">
+  @Html.AntiForgeryToken()
+  @if(@Model.PizzaList != null)
+  {
+    @foreach(var item in @Model.PizzaList)
+    {
+      <label class = "btn btn-primary">@item
+        @Html.RadioButtonFor(pm => pm.pizzaType, @item)
+      </label>
+    }
+
+    <br>
+
+    @foreach (var item in @Model.SizeList)
+    {
+      <label class = "btn btn-primary">@item
+        @Html.RadioButtonFor(pm => pm.size, @item)
+      </label>
+    } 
+  }
+
+  <br>  
+
+  <button class="btn btn-primary" type="submit">Create</button>
+</form>

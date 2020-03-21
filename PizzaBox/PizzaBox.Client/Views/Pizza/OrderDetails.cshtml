@@ -1,0 +1,21 @@
+@model List<PizzaModel>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Pizza Type</th>
+      <th scope="col">Pizza Size</th>
+      <th scope="col">Cost</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var item in @Model)
+    {
+      <tr>
+        <td>@item.pizzaType</td>
+        <td>@item.size</td>
+        <td>@item.Cost</td>
+    </tr>
+    }
+  </tbody>
+</table>
