@@ -46,8 +46,9 @@ namespace PizzaBox.Client.Controllers
         if (user != null)
         {
           if (user.UserType == "Admin") { return View("AdminHome"); }
-
-          return View("CustHome", user);
+          
+          TempData["user"] = login.Username;
+          return View("CustHome");
         }
       }
 

@@ -32,22 +32,35 @@ namespace PizzaBox.Client.Controllers
       // ViewData["pizzatype"] = pizzaModel.pizzaType;
       // ViewData["size"] = pizzaModel.size;
       
-
-      _pm.Add(pizzaModel);
-
-      foreach (var item in _pm)
+      if(ModelState.IsValid)
       {
-        item.Cost = (_ptr.Get(item.pizzaType)).Cost + (_sr.Get(item.size)).Cost;
+        _pm.Add(pizzaModel);
+
+        foreach (var item in _pm)
+        {
+          item.Cost = (_ptr.Get(item.pizzaType)).Cost + (_sr.Get(item.size)).Cost;
+        }
+
+        return View("OrderDetails", _pm);
       }
 
+      return View(new PizzaModel());
+    }
+
+    [HttpGet]
+    public IActionResult Remove()
+    {
+    
+     int count = 0;
+     int.TryParse(TempData["count"].ToString(), out count);
+      _pm.RemoveAt(count - 1);
       return View("OrderDetails", _pm);
     }
 
     [HttpGet]
-    public IActionResult Checkout(string test)
+    public IActionResult Checkout()
     {
-      ViewData["pizza"] = test;
-      return View();
+      return View(_pm);
     }
   }
 }

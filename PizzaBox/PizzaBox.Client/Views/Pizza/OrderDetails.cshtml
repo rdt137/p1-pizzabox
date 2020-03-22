@@ -5,6 +5,8 @@
 
 @model List<PizzaModel>
 
+@{TempData["count"] = @Model.Count;}
+
 @{decimal totalCost = 0;}
 @foreach (var item in @Model)
 {
@@ -39,4 +41,12 @@
 </table>
 
 <a href="/pizza/create">Add another pizza</a>
-@Html.ActionLink("Checkout", "checkout", "pizza", new {pizza = "test"})
+
+<br>
+
+<a href="/pizza/remove">Remove last pizza</a>
+
+<br>
+
+<a href="/pizza/checkout/">checkout</a>
+@* @Html.ActionLink("Checkout", "checkout", "pizza", new {pizza = @Model}) *@

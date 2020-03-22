@@ -7,7 +7,7 @@
 
 <form class="form-group" action="/pizza/create" method="post">
   @Html.AntiForgeryToken()
-  @if(@Model.PizzaList != null)
+  @try
   {
     @foreach(var item in @Model.PizzaList)
     {
@@ -25,8 +25,16 @@
       </label>
     } 
   }
+  catch(Exception) {}
+  finally
+  {
+    <br>  
+    
+    <button class="btn btn-primary" type="submit">Create</button>
+  }
 
-  <br>  
 
-  <button class="btn btn-primary" type="submit">Create</button>
+  
+
+  
 </form>

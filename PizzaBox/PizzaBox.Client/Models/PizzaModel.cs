@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using PizzaBox.Domain.Models;
 using PizzaBox.Storing.Repositories;
@@ -12,7 +14,9 @@ namespace PizzaBox.Client.Models
 
     public List<PizzaType> PizzaList { get; set; }
     public List<Size> SizeList { get; set; }  
+    [Required]
     public string size { get; set; }
+    [Required]
     public string pizzaType { get; set; }
     public decimal Cost { get; set; }
 

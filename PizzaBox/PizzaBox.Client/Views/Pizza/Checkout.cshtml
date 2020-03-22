@@ -1,3 +1,9 @@
+@model List<PizzaModel>
 
+<p>@TempData["user"]</p>
 
-<p>@ViewData["pizza"]</p>
+@foreach (var item in @Model)
+{
+  <p>@item.pizzaType</p>
+  <p>@item.size</p>
+}
