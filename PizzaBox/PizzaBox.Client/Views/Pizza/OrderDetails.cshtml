@@ -1,4 +1,15 @@
+@{
+  Layout = "~/Views/Shared/_Layout2.cshtml";
+  ViewData["Title"] = "Order Details";
+}
+
 @model List<PizzaModel>
+
+@{decimal totalCost = 0;}
+@foreach (var item in @Model)
+{
+  totalCost += item.Cost;
+}
 
 <table class="table">
   <thead>
@@ -14,8 +25,18 @@
       <tr>
         <td>@item.pizzaType</td>
         <td>@item.size</td>
-        <td>@item.Cost</td>
+        <td>$@item.Cost</td>
     </tr>
     }
   </tbody>
+  <tfoot>
+    <tr>
+      <th>Total</th>
+      <td></td>
+      <td>$@totalCost</td>
+    </tr>
+  </tfoot>
 </table>
+
+<a href="/pizza/create">Add another pizza</a>
+@Html.ActionLink("Checkout", "checkout", "pizza", new {pizza = "test"})

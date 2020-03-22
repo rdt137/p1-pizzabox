@@ -42,5 +42,12 @@ namespace PizzaBox.Client.Controllers
 
       return View("OrderDetails", _pm);
     }
+
+    [HttpGet]
+    public IActionResult Checkout(string test)
+    {
+      ViewData["pizza"] = test;
+      return View();
+    }
   }
 }
