@@ -9,13 +9,6 @@
   @Html.AntiForgeryToken()
   @try
   {
-    @* @foreach(var item in @Model.Locations)
-    {
-      <label class = "btn btn-primary">@item
-        @Html.RadioButtonFor(lm => lm.Location, @item)
-      </label>
-    } *@
-
     <div class="form-group">
       <label>Select Location
         <select class="form-control" asp-for="@Model.Location">

@@ -73,6 +73,9 @@ namespace PizzaBox.Client.Controllers
     
      int count = 0;
      int.TryParse(TempData["count"].ToString(), out count);
+
+     if(count <= 0) { return View("OrderDetails", _pm); }
+     
       _pm.RemoveAt(count - 1);
       return View("OrderDetails", _pm);
     }

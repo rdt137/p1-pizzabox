@@ -5,6 +5,8 @@
 
 @model List<StoreSales>
 
+@{decimal totalSales = 0;}
+
 <table class="table">
   <thead>
     <tr>
@@ -18,7 +20,14 @@
       <tr>
         <td>@item.Name</td>
         <td>$@item.CostPerStore</td>
-    </tr>
+      </tr>
+      totalSales += @item.CostPerStore;
     }
   </tbody>
+  <tfoot>
+    <tr>
+      <td>Total Sales</td>
+      <td>$@totalSales</td>
+    </tr>
+  </tfoot>
 </table>
