@@ -34,19 +34,45 @@ namespace PizzaBox.Client.Controllers
     }
 
     [HttpGet]
-    public IActionResult Sales()
+    public IActionResult PizzaSales()
     {
-      // var pizza = from p in _db.Pizza
-      //             select new {p.PizzaType, p.Cost}
-      //             group by p.PizzaType;
+      
+      var pizzaT = from p in _db.Pizza
+                  select new{p.PizzaType, p.Size, p.Cost};  
+
+
                   
-      // List<string> od = new List<string>();
-      // foreach (var item in orders)
-      // {
-      //   od.Add(item.ToString());
-      // }
-      // return View(od);
-      return View();
+      List<PizzaModel> pi = new List<PizzaModel>();
+      foreach (var item in pizzaT)
+      {
+        var p = new PizzaModel();
+        p.Cost = item.Cost;
+        p.pizzaType = item.PizzaType.ToString();
+        p.size = item.Size.ToString();
+        pi.Add(p);
+      }
+      return View(pi);
+    }
+
+    [HttpGet]
+    public IActionResult StoreSales()
+    {
+      
+      var pizzaT = from p in _db.Pizza
+                  select new{p.PizzaType, p.Size, p.Cost};  
+
+
+                  
+      List<PizzaModel> pi = new List<PizzaModel>();
+      foreach (var item in pizzaT)
+      {
+        var p = new PizzaModel();
+        p.Cost = item.Cost;
+        p.pizzaType = item.PizzaType.ToString();
+        p.size = item.Size.ToString();
+        pi.Add(p);
+      }
+      return View(pi);
     }
   }
 }
