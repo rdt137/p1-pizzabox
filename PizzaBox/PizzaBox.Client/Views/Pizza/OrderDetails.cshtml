@@ -1,5 +1,5 @@
 @{
-  Layout = "~/Views/Shared/_Layout2.cshtml";
+  Layout = "~/Views/Shared/_LayoutCust.cshtml";
   ViewData["Title"] = "Order Details";
 }
 
@@ -40,13 +40,20 @@
   </tfoot>
 </table>
 
-<a href="/pizza/create">Add another pizza</a>
+<a href="/pizza/create" class="btn btn-info" role="button">Add Another Pizza</a>
 
 <br>
-
-<a href="/pizza/remove">Remove last pizza</a>
-
 <br>
 
-<a href="/pizza/checkout/">checkout</a>
-@* @Html.ActionLink("Checkout", "checkout", "pizza", new {pizza = @Model}) *@
+<a href="/pizza/remove" class="btn btn-info" role="button">Remove Last Pizza</a>
+
+<br>
+<br>
+
+<a href="/pizza/pizzahome/" class="btn btn-info" role="button">Cancel Order</a>
+
+<br>
+<br>
+
+<a href="/pizza/checkout/" class="btn btn-info" role="button">Checkout</a>
+

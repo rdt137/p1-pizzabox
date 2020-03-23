@@ -1,5 +1,5 @@
 @{
-  Layout = "~/Views/Shared/_Layout2.cshtml";
+  Layout = "~/Views/Shared/_LayoutCust.cshtml";
   ViewData["Title"] = "Create Pizza";
 }
 
@@ -9,21 +9,29 @@
   @Html.AntiForgeryToken()
   @try
   {
-    @foreach(var item in @Model.PizzaList)
-    {
-      <label class = "btn btn-primary">@item
-        @Html.RadioButtonFor(pm => pm.pizzaType, @item)
+    <div class="form-group">
+      <label>Select Pizza:
+        <select class="form-control" asp-for="@Model.pizzaType">
+        @foreach (var item in @Model.PizzaList)
+        {
+          <option value="@item.Name">@item</option>
+        }
+        </select>
       </label>
-    }
+    </div>
 
     <br>
 
-    @foreach (var item in @Model.SizeList)
-    {
-      <label class = "btn btn-primary">@item
-        @Html.RadioButtonFor(pm => pm.size, @item)
+    <div class="form-group">
+      <label>Select Size:
+        <select class="form-control" asp-for="@Model.size">
+        @foreach (var item in @Model.SizeList)
+        {
+          <option value="@item.Name">@item</option>
+        }
+        </select>
       </label>
-    } 
+    </div>
   }
   catch(Exception) {}
   finally

@@ -1,9 +1,9 @@
 @{
-  Layout = "~/Views/Shared/_Layout2.cshtml";
-  ViewData["Title"] = "Pizza Sales";
+  Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+  ViewData["Title"] = "Pizza Type Sales";
 }
 
-@model List<PizzaModel>
+@model List<PizzaTypeSales>
 
 <table class="table">
   <thead>
@@ -16,8 +16,8 @@
     @foreach (var item in @Model)
     {
       <tr>
-        <td>@item.pizzaType</td>
-        <td>$@item.Cost</td>
+        <td>@item.Name</td>
+        <td>$@item.CostPerType</td>
     </tr>
     }
   </tbody>

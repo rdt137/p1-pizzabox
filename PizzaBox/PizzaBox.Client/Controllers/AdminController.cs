@@ -14,6 +14,12 @@ namespace PizzaBox.Client.Controllers
     static readonly PizzaBoxDbContext _db = db.Instance;
     
     [HttpGet]
+    public IActionResult AHome()
+    {
+      return View("AdminHome");
+    }
+    
+    [HttpGet]
     public IActionResult OrderHistory()
     {
       var orders = from o in _db.Order
@@ -34,45 +40,75 @@ namespace PizzaBox.Client.Controllers
     }
 
     [HttpGet]
-    public IActionResult PizzaSales()
+    public IActionResult PizzaTypeSales()
     {
-      
-      var pizzaT = from p in _db.Pizza
-                  select new{p.PizzaType, p.Size, p.Cost};  
-
-
-                  
-      List<PizzaModel> pi = new List<PizzaModel>();
-      foreach (var item in pizzaT)
+      var pizza = new PizzaModel();
+      List<PizzaTypeSales> pi = new List<PizzaTypeSales>();
+      foreach (var item in pizza.PizzaList)
       {
-        var p = new PizzaModel();
-        p.Cost = item.Cost;
-        p.pizzaType = item.PizzaType.ToString();
-        p.size = item.Size.ToString();
-        pi.Add(p);
+        var pizzaT = from p in _db.Pizza
+                    where p.PizzaType.Name == item.ToString()
+                    select new{p.PizzaId, p.PizzaType, p.Size, p.Cost};
+        
+        var pt = new PizzaTypeSales();
+        foreach (var ite in pizzaT)
+        {          
+          pt.CostPerType += ite.Cost;          
+        }
+
+        pt.Name = item.Name;
+        pi.Add(pt);
       }
+
       return View(pi);
+    }
+
+    public IActionResult PizzaSizeSales()
+    {
+      var pizza = new PizzaModel();
+      List<PizzaSizeSales> si = new List<PizzaSizeSales>();
+
+      foreach (var item in pizza.SizeList)
+      {
+        var pizzaS = from p in _db.Pizza
+                    where p.Size.Name == item.ToString()
+                    select new{p.PizzaId, p.PizzaType, p.Size, p.Cost};
+        
+        var ps = new PizzaSizeSales();
+        foreach (var ite in pizzaS)
+        {                 
+          ps.CostPerSize += ite.Cost;          
+        }
+
+        ps.Name = item.Name;
+        si.Add(ps);
+      }
+
+      return View(si);
     }
 
     [HttpGet]
     public IActionResult StoreSales()
-    {
-      
-      var pizzaT = from p in _db.Pizza
-                  select new{p.PizzaType, p.Size, p.Cost};  
-
-
-                  
-      List<PizzaModel> pi = new List<PizzaModel>();
-      foreach (var item in pizzaT)
+    {      
+      var loc = new LocationModel();
+      List<StoreSales> sti = new List<StoreSales>();
+      foreach (var item in loc.Locations)
       {
-        var p = new PizzaModel();
-        p.Cost = item.Cost;
-        p.pizzaType = item.PizzaType.ToString();
-        p.size = item.Size.ToString();
-        pi.Add(p);
+        var orderL = from o in _db.Order
+                    where o.Location == item
+                    select new{o.OrderId, o.Location, o.Cost, o.User};
+        
+        var st = new StoreSales();
+        foreach (var ite in orderL)
+        {          
+          st.CostPerStore += ite.Cost;          
+        }
+
+        st.Name = item.Location;
+        sti.Add(st);
       }
-      return View(pi);
+      
+      return View(sti);
     }
   }
 }

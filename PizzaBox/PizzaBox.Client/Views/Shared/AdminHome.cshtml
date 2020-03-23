@@ -1,12 +1,21 @@
 @{
-  Layout = "~/Views/Shared/_Layout2.cshtml";
+  Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
   ViewData["Title"] = "Admin Home";
 }
 
-<a href="/admin/orderhistory">Order History</a>
+<a href="/admin/orderhistory" class="btn btn-info" role="button">Order History</a>
 
 <br>
+<br>
 
-<a href="/admin/pizzasales">Pizza Sales Report</a>
+<a href="/admin/pizzatypesales" class="btn btn-info" role="button">Pizza Type Sales Report</a>
 
-<a href="/admin/storesales">Store Sales Report</a>
+<br>
+<br>
+
+<a href="/admin/pizzasizesales" class="btn btn-info" role="button">Pizza Size Sales Report</a>
+
+<br>
+<br>
+
+<a href="/admin/storesales" class="btn btn-info" role="button">Store Sales Report</a>

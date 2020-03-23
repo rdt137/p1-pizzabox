@@ -1,5 +1,5 @@
 @{
-  Layout = "~/Views/Shared/_Layout2.cshtml";
+  Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
   ViewData["Title"] = " Order History";
 }
 
@@ -22,8 +22,8 @@
         <td>@item.OrderId</td>
         <td>@item.UserId</td>
         <td>$@item.Cost</td>
-        <td>$@item.OrderDate</td>
-        <td>$@item.Location</td>
+        <td>@item.OrderDate</td>
+        <td>@item.Location</td>
     </tr>
     }
   </tbody>

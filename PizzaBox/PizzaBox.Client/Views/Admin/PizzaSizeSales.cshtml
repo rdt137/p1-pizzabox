@@ -1,14 +1,14 @@
 @{
   Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-  ViewData["Title"] = "Store Sales";
+  ViewData["Title"] = "Pizza Size Sales";
 }
 
-@model List<StoreSales>
+@model List<PizzaSizeSales>
 
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">Store Location</th>
+      <th scope="col">Size</th>
       <th scope="col">Total Sales</th>
     </tr>
   </thead>
@@ -17,7 +17,7 @@
     {
       <tr>
         <td>@item.Name</td>
-        <td>$@item.CostPerStore</td>
+        <td>$@item.CostPerSize</td>
     </tr>
     }
   </tbody>
