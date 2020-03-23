@@ -24,11 +24,12 @@ namespace PizzaBox.Client.Controllers
     [HttpGet]
     public IActionResult CustHistory()
     {
-                  
+      var user = TempData["user"];          
       var orders = from o in _db.Order
-                  where o.User == _ur.Get(TempData["user"].ToString())
+                  where o.User == _ur.Get(user.ToString())
                   select new {o.OrderId, o.Cost, o.OrderDate, o.Location};
-                  
+      TempData["user"] = user;          
+      
       List<OrderModel> od = new List<OrderModel>();
       foreach (var item in orders)
       {

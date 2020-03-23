@@ -51,16 +51,7 @@ namespace PizzaBox.Client.Controllers
 
     [HttpPost]
     public IActionResult Create(PizzaModel pizzaModel)
-    {
-      //Pizza p = new Pizza();
-      // Order o = new Order();
-      
-      // p.PizzaType = pizzaModel.pizzaType;
-      // p.Size = pizzaModel.size;
-
-      // ViewData["pizzatype"] = pizzaModel.pizzaType;
-      // ViewData["size"] = pizzaModel.size;
-      
+    {      
       if(ModelState.IsValid)
       {
         _pm.Add(pizzaModel);
@@ -90,9 +81,10 @@ namespace PizzaBox.Client.Controllers
     public IActionResult Checkout()
     {
       Order o = new Order();
-
+      var user = TempData["user"];
       o.Location = _str.Get(TempData["location"].ToString());
-      o.User = _ur.Get(TempData["user"].ToString());
+      o.User = _ur.Get(user.ToString());
+      TempData["user"] = user;
       o.OrderDate = DateTime.Now;  
 
       decimal totalCost = 0;
