@@ -1,6 +1,6 @@
 @{
   Layout = "~/Views/Shared/_Layout2.cshtml";
-  ViewData["Title"] = "Customer Order History";
+  ViewData["Title"] = " Order History";
 }
 
 @model List<OrderModel>
@@ -9,6 +9,7 @@
   <thead>
     <tr>
       <th scope="col">OrderId</th>
+      <th scope="col">User</th>
       <th scope="col">Cost</th>
       <th scope="col">OrderDate</th>
       <th scope="col">Location</th>
@@ -19,6 +20,7 @@
     {
       <tr>
         <td>@item.OrderId</td>
+        <td>@item.UserId</td>
         <td>$@item.Cost</td>
         <td>$@item.OrderDate</td>
         <td>$@item.Location</td>

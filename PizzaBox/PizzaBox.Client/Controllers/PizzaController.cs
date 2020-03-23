@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using PizzaBox.Client.Models;
@@ -12,8 +13,36 @@ namespace PizzaBox.Client.Controllers
     private static List<PizzaModel> _pm = new List<PizzaModel>();
     private static PizzaTypeRepository _ptr = new PizzaTypeRepository();
     private static SizeRepository _sr = new SizeRepository();
+    private static StoreRepository _str = new StoreRepository();
+    private static UserRepository _ur = new UserRepository();
+    private static OrderRepository _or = new OrderRepository();
+    private static PizzaRepository _pr = new PizzaRepository();
 
 
+    [HttpGet]
+    public IActionResult PizzaHome()
+    {
+      _pm.Clear();
+      return View("CustHome");
+    }
+
+    [HttpGet]
+    public IActionResult Location()
+    {
+      return View(new LocationModel());
+    }
+
+    [HttpPost]
+    public IActionResult Location(LocationModel loc)
+    {
+      if(ModelState.IsValid)
+      {
+        TempData["location"] = loc.Location;
+        return View("Create", new PizzaModel());
+      }
+      return View(loc);
+    }
+    
     [HttpGet]
     public IActionResult Create()
     {
@@ -60,7 +89,45 @@ namespace PizzaBox.Client.Controllers
     [HttpGet]
     public IActionResult Checkout()
     {
-      return View(_pm);
+      Order o = new Order();
+
+      o.Location = _str.Get(TempData["location"].ToString());
+      o.User = _ur.Get(TempData["user"].ToString());
+      o.OrderDate = DateTime.Now;  
+
+      decimal totalCost = 0;
+      foreach (var item in _pm)
+      {
+        totalCost += item.Cost;
+      }    
+      o.Cost = totalCost;
+
+      _or.Update(o);
+
+      bool worked = false;
+
+      foreach (var item in _pm)
+      {
+        var p = new Pizza();
+
+        var pizzaType = _ptr.Get(item.pizzaType.ToString());
+        var size = _sr.Get(item.size.ToString());        
+
+        // pizzaType.Pizzas = new List<Pizza> { p }; // p.crust = *crustId
+        // size.Pizzas = new List<Pizza> { p };
+
+        p.PizzaType = pizzaType;
+        p.Size = size;
+        p.Cost = item.Cost;
+        p.Order = o;
+
+        worked = _pr.Update(p);
+      }
+      
+      if(worked)
+        return View();
+      
+      return View("OrderDetails");
     }
   }
 }

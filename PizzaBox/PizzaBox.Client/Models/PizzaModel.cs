@@ -14,9 +14,9 @@ namespace PizzaBox.Client.Models
 
     public List<PizzaType> PizzaList { get; set; }
     public List<Size> SizeList { get; set; }  
-    [Required]
+    [Required(ErrorMessage = "Please enter a size")]
     public string size { get; set; }
-    [Required]
+    [Required(ErrorMessage = "Please enter a pizza type")]
     public string pizzaType { get; set; }
     public decimal Cost { get; set; }
 

@@ -1,0 +1,25 @@
+@{
+  Layout = "~/Views/Shared/_Layout2.cshtml";
+  ViewData["Title"] = "Choose Location";
+}
+
+@model PizzaBox.Client.Models.LocationModel
+
+<form class="form-group" action="/pizza/location" method="post">
+  @Html.AntiForgeryToken()
+  @try
+  {
+    @foreach(var item in @Model.Locations)
+    {
+      <label class = "btn btn-primary">@item
+        @Html.RadioButtonFor(lm => lm.Location, @item)
+      </label>
+    }
+  }
+  catch(Exception) {}
+
+  finally
+  {
+    <button class="btn btn-primary" type="submit">Select Store</button>
+  }
+</form>

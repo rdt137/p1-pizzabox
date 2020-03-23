@@ -1,9 +1,6 @@
-@model List<PizzaModel>
-
-<p>@TempData["user"]</p>
-
-@foreach (var item in @Model)
-{
-  <p>@item.pizzaType</p>
-  <p>@item.size</p>
+@{
+  Layout = "~/Views/Shared/_Layout2.cshtml";
+  ViewData["Title"] = "Checkout";
 }
+
+<p>It worked !!!!</p>
