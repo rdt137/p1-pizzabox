@@ -37,6 +37,23 @@ namespace PizzaBox.Client.Controllers
     {
       if(ModelState.IsValid)
       {
+        var user = TempData["user"].ToString();
+        TempData["user"] = user;
+        var userD = _ur.Get(user);
+        var oDate = _or.Get(userD);
+        TimeSpan span = new TimeSpan();
+        try
+        {        
+          span = DateTime.Now.Subtract(oDate.GetDate());
+
+          if(span.Hours < 24 && !(oDate.GetLocation() == loc.Location))
+          {
+            ViewBag.Error = "Can only order from " + oDate.GetLocation() + " within the next " + (24 - span.Hours) + " hours.";
+            return View(loc);
+          }
+        }
+        catch(Exception) {}
+        
         TempData["location"] = loc.Location;
         return View("Create", new PizzaModel());
       }
@@ -83,6 +100,15 @@ namespace PizzaBox.Client.Controllers
     [HttpGet]
     public IActionResult Checkout()
     {
+      decimal tc = 0;
+      decimal.TryParse(TempData["totalCost"].ToString(), out tc);
+
+      if(tc > 250) 
+      { 
+        ViewBag.Error = "Total Cost can't exceed $250";
+        return View("OrderDetails", _pm);
+      }
+
       Order o = new Order();
       var user = TempData["user"];
       o.Location = _str.Get(TempData["location"].ToString());
