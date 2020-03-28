@@ -7,13 +7,13 @@ namespace PizzaBox.Testing.Specs
 {
   public class PizzaTests
   {
-    [Fact]
-    public void Test_RepositoryGet()
-    {
-      var sut = new PizzaRepository();
-      var actual = sut.Get();
+    // [Fact]
+    // public void Test_RepositoryGet()
+    // {
+    //   var sut = new PizzaRepository();
+    //   var actual = sut.Get();
 
-      Assert.True(actual.Count() >= 0);
-    }
+    //   Assert.True(actual.Count() >= 0);
+    // }
   }
 }
