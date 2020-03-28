@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   app:
-    image: fredbelotte/p1proj
+    image: robythomas/p1
     networks:
       - skynet
     ports:
