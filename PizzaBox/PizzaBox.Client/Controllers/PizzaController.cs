@@ -134,9 +134,6 @@ namespace PizzaBox.Client.Controllers
         var pizzaType = _ptr.Get(item.pizzaType.ToString());
         var size = _sr.Get(item.size.ToString());        
 
-        // pizzaType.Pizzas = new List<Pizza> { p }; // p.crust = *crustId
-        // size.Pizzas = new List<Pizza> { p };
-
         p.PizzaType = pizzaType;
         p.Size = size;
         p.Cost = item.Cost;
